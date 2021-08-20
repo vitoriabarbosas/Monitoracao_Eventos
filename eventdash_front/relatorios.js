@@ -14,7 +14,7 @@ function carregaInfo(){
                                                     <b> RACF: </b> ${user.racf}<br>
                                                     <b> Email: </b> ${user.email}<br>
                                                     <b> Departamento: </b> ${user.departamento}
-                                                    <p> <a class = "btn btn-primary w-100" id="Relatorio" href="eventos.html">Relatório de Eventos por Período</a></p>
+                                                    <p> <a class = "btn btn-primary w-100" id="Relatorio" href="eventos.html"><b>Clique aqui para acessar o Relatório de Eventos por Período</b></a></p>
                                                     
                                                     
 
@@ -26,4 +26,35 @@ function carregaInfo(){
 function logout(){
     localStorage.removeItem("userDASH");
     window.location = "index.html";
+}
+
+function gerarAlarme() {
+    var url = "http://localhost:8080/alarmes";
+
+    fetch(url).then(res => res.json()).then(listaAlarmes => preencheTabela(listaAlarmes));
+}
+
+function preencheTabela(listaAlarmes){
+    var strTabela = `<table class="table">
+                        <thead>
+                            <th> id </th>
+                            <th> nome </th>
+                            <th> descricao </th>
+                        </thead> 
+                        
+                        <tbody> `;
+
+    for (i=0; i<listaAlarmes.length; i++){
+        let alarme = listaAlarmes[i];
+
+        strTabela = strTabela + `<tr>
+                                     <td> ${alarme.id} </td>
+                                     <td> ${alarme.nome} </td>
+                                     <td> ${alarme.descricao} </td>
+                                 </tr>`; 
+    }
+    strTabela = strTabela + `   </tbody>
+                             </table>`;
+    
+    document.getElementById("relatorio").innerHTML = strTabela;
 }
