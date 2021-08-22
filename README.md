@@ -2,7 +2,7 @@
 
 Projeto final para Treinamento com a Gama Academy. 
 
-*Portal de monitoração de alertas e eventos.
+*Portal de monitoração de alertas e eventos.*
 
 Backend: 
 - Java
